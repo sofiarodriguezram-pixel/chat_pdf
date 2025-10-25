@@ -15,10 +15,15 @@ st.set_page_config(page_title="Análisis Inteligente de PDF", layout="centered",
 # ---------- ESTILO PERSONALIZADO ----------
 st.markdown("""
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        html, body, [class*="css"] {
+            font-family: 'Poppins', sans-serif !important;
+            color: #1e1e1e;
+        }
+
         body {
             background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
-            color: #1e1e1e;
-            font-family: 'Inter', sans-serif;
         }
 
         .stApp {
@@ -43,7 +48,7 @@ st.markdown("""
         }
 
         .stTextInput > div > div > input, .stTextArea textarea {
-            background-color: rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.85);
             border-radius: 10px;
             border: 1px solid #a1a1a1;
             color: #1e1e1e;
@@ -89,6 +94,12 @@ st.markdown("""
         }
 
         footer {visibility: hidden;}
+
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -96,10 +107,12 @@ st.markdown("""
 st.title('📄 Análisis Inteligente de PDF con RAG')
 st.write("🧠 **Versión de Python:**", platform.python_version())
 
-# ---------- IMAGEN DE CABECERA ----------
+# ---------- IMAGEN CENTRADA ----------
 try:
     image = Image.open('Chat_pdf.png')
+    st.markdown('<div class="centered-image">', unsafe_allow_html=True)
     st.image(image, width=320)
+    st.markdown('</div>', unsafe_allow_html=True)
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
 
@@ -162,3 +175,4 @@ elif pdf is not None and not ke:
     st.warning("⚠️ Por favor ingresa tu clave de API de OpenAI para continuar")
 else:
     st.info("📎 Carga un archivo PDF para comenzar el análisis")
+
